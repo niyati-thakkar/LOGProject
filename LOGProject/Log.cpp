@@ -1,1 +1,4 @@
-#include <iostream>
+//#include <iostream>
+//namespace nspace {
+//	
+//}
