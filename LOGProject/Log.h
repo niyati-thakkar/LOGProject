@@ -2,15 +2,20 @@
 #define _LOG_H
 
 namespace Lognspace {
-	struct Log
+	class Log
 	{
 	public:
 		enum class Level {
 			LevelError = 0, LevelWarning, LevelInfo
 		};
+		
 	private:
-		Level m_LogLevel = Level::LevelInfo;
+		Level m_LogLevel;
 	public:
+		Log() {
+			m_LogLevel = Level::LevelInfo;
+		}
+
 		inline void SetLogLevel(Level level)
 		{
 			m_LogLevel = level;
