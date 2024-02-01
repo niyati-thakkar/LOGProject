@@ -1,6 +1,6 @@
 #ifndef _LOG_H
 #define _LOG_H
-
+#include "Date.h"
 namespace Lognspace {
 	class Log
 	{
@@ -11,31 +11,16 @@ namespace Lognspace {
 		
 	private:
 		Level m_LogLevel;
+		Date storedDate;
+		String dateRep;
 	public:
-		Log() {
-			m_LogLevel = Level::LevelInfo;
-		}
+		Log();
+		void setLogLevel(Level level);
+		void Warn(const char* message);
+		void Error(const char* message);
+		void Info(const char* message);
+		void  updateDate();
 
-		inline void SetLogLevel(Level level)
-		{
-			m_LogLevel = level;
-		}
-		inline void Warn(const char* message)
-		{
-			if (m_LogLevel >= Level::LevelWarning)
-				std::cout << "[Warning]: " << message << std::endl;
-		}
-		inline void Error(const char* message)
-		{
-			if (m_LogLevel >= Level::LevelError)
-				std::cout << "[Error]: " << message << std::endl;
-		}
-		inline void Info(const char* message)
-		{
-			if (m_LogLevel >= Level::LevelInfo)
-				std::cout << "[Info]: " << message << std::endl;
-		}
 	};
 }
-using namespace Lognspace;
 #endif
