@@ -3,8 +3,10 @@
 #include <ostream>
 
 #include "String.h"
+
 String::String(const char* string, int n) {
-    m_Size = n;
+    m_Size = strlen(string);
+    if (n != 0) m_Size = n;
     m_Buffer = new char[m_Size + 1];
     memcpy(m_Buffer, string, m_Size);
     m_Buffer[m_Size] = 0;
@@ -32,7 +34,10 @@ String String::operator+(const String& other) {
 }
 String::~String() { delete[] m_Buffer; }
 char& String::operator[](unsigned int index) { return m_Buffer[index]; }
-std::ostream& operator<<(std::ostream& stream, const String& string) {
-    stream << string.m_Buffer;
-    return stream;
+void String::append(const String& other) {
+    *this = *this + other;
+}
+String String::operator+(const char* s1, const String& other) {
+    String temp{ s1 };
+    return temp + other;
 }

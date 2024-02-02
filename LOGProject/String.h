@@ -12,9 +12,19 @@ public:
 	String(const String& other);
 	String& operator=(const String& other);
 	String operator+(const String& other);
+	friend String operator+(const char* s1, const String& other);
 	~String();
 	char& operator[](unsigned int index);
+
+	void print() {
+		std::cout << m_Buffer;
+	}
 	friend std::ostream& operator<<(std::ostream& stream, const String&
-		string);
+		string) {
+		stream << string.m_Buffer;
+		return stream;
+	}
+	void append(const String& other);
 };
+
 #endif

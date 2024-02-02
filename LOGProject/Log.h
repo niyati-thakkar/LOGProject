@@ -1,6 +1,7 @@
 #ifndef _LOG_H
 #define _LOG_H
 #include "Date.h"
+#include "String.h"
 namespace Lognspace {
 	class Log
 	{
@@ -16,9 +17,9 @@ namespace Lognspace {
 	public:
 		Log();
 		void setLogLevel(Level level);
-		void Warn(const char* message);
-		void Error(const char* message);
-		void Info(const char* message);
+		void Warn(String message);
+		void Error(String message);
+		void Info(String message);
 		void  updateDate();
 
 	};

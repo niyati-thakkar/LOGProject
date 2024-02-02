@@ -12,7 +12,7 @@ int main()
 	std::cin.get();
 }
 //int main() {
-//	String string = "QickStep";
+//	/*String string = "QickStep";
 //	String second = string;
 //	string[2] = 'u';
 //	std::cout << string << std::endl;
@@ -21,5 +21,9 @@ int main()
 //	String second2 = "Harishankar";
 //	string1 = string1 + second2;
 //	std::cout << string1 << std::endl;
-//	std::cout << second2 << std::endl;
+//	std::cout << second2 << std::endl;*/
+//	String s1 = "hello";
+//	String s2 = "something";
+//	s2.append(s1);
+//	std::cout << s2;
 //}

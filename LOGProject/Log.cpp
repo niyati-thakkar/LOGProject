@@ -23,19 +23,19 @@ void Lognspace::Log::setLogLevel(Log::Level level)
 {
 	m_LogLevel = level;
 }
-void Lognspace::Log::Warn(const char* message)
+void Lognspace::Log::Warn(String message)
 {
 	updateDate();
 	if (m_LogLevel >= Level::LevelWarning)
 		std::cout << "[Warning]: " << message << " " << dateRep << " " << std::endl;
 }
-void Lognspace::Log::Error(const char* message)
+void Lognspace::Log::Error(String message)
 {
 	updateDate();
 	if (m_LogLevel >= Level::LevelError)
 		std::cout << "[Error]: " << message << " " << dateRep << " " << std::endl;
 }
-void Lognspace::Log::Info(const char* message)
+void Lognspace::Log::Info(String message)
 {
 	updateDate();
 	if (m_LogLevel >= Level::LevelInfo)
