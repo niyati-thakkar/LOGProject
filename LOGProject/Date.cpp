@@ -19,8 +19,8 @@ String Date::getStringRep() const{
 	date[6] = '0' + (year / 1000);
 	// std::cout << date;
 	return date;
-
 }
+
 Date Date::currentDate() {
 	struct tm ltm;
 	time_t now = time(0);
@@ -28,6 +28,7 @@ Date Date::currentDate() {
 
 	return Date(ltm.tm_mday, 1 + ltm.tm_mon, 1900 + ltm.tm_year);
 }
+
 Date::Date(int d, int m, int y) {
 	if (y < 1) throw "invalid date";
 	if (m < 1 || m > 12) throw "invalid date";
@@ -38,6 +39,7 @@ Date::Date(int d, int m, int y) {
 	month = m;
 	year = y;
 }
+
 bool Date::operator!=(const Date& other) const {
 	if (Date::year != other.year) return true;
 	if (Date::month != other.month) return true;

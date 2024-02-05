@@ -14,13 +14,14 @@ namespace Lognspace {
 		Level m_LogLevel;
 		Date storedDate;
 		String dateRep;
+
 	public:
 		Log();
 		void setLogLevel(Level level);
 		void Warn(String message);
 		void Error(String message);
 		void Info(String message);
-		void  updateDate();
+		void  checkDate();
 
 	};
 }
