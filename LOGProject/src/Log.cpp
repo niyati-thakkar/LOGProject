@@ -3,7 +3,7 @@
 //	
 //}
 
-#include "Log.h"
+#include "../include/Log.h"
 
 
 void  Lognspace::Log::checkDate() {

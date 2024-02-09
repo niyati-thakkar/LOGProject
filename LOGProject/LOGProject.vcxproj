@@ -131,17 +131,22 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="Date.cpp" />
-    <ClCompile Include="Log.cpp" />
-    <ClCompile Include="LOGProject.cpp" />
-    <ClCompile Include="String.cpp" />
-    <ClCompile Include="Test.cpp" />
+    <ClCompile Include="src\Complex.cpp" />
+    <ClCompile Include="src\Date.cpp" />
+    <ClCompile Include="src\LinkedList.cpp" />
+    <ClCompile Include="src\Log.cpp" />
+    <ClCompile Include="src\LOGProject.cpp" />
+    <ClCompile Include="src\String.cpp" />
+    <ClCompile Include="src\Test.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Date.h" />
-    <ClInclude Include="Log.h" />
-    <ClInclude Include="namespaceList.h" />
-    <ClInclude Include="String.h" />
+    <ClInclude Include="include\Complex.h" />
+    <ClInclude Include="include\Date.h" />
+    <ClInclude Include="include\LinkedList.h" />
+    <ClInclude Include="include\Log.h" />
+    <ClInclude Include="include\namespaceList.h" />
+    <ClInclude Include="include\String.h" />
+    <ClInclude Include="include\Exceptions.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
