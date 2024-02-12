@@ -1,6 +1,6 @@
 #include "../include/Date.h"
 String Date::getStringRep() const{
-	String date("",11);
+	String date("aaaaaaaaaaa");
 	date[10] = '\0';
 
 	date[1] = '0' + (day % 10);

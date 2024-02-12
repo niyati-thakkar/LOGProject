@@ -6,9 +6,9 @@
 class String {
 private:
 	char* m_Buffer;
-	unsigned int m_Size;
+	unsigned int m_Size=0;
 public:
-	String(const char* string="", unsigned long int n=0);
+	String(const char* string="");
 	String(const String& other) noexcept;
 	String(String&& other) noexcept;
 	String& operator=(const String& other) noexcept;

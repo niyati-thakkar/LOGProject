@@ -9,11 +9,9 @@ unsigned int String::getSize() {
     return m_Size;
 }
 
-String::String(const char* string, unsigned long int n) {
+String::String(const char* string) {
     std::cout << "default constructor 1" << "\n";
-    if (n < 0 || n > std::numeric_limits<int>::max()) throw Exception::Overflow{};
     m_Size = strlen(string);
-    if (n != 0) m_Size = n > m_Size? n : m_Size;
     m_Buffer = new char[m_Size + 1];
     memcpy(m_Buffer, string, m_Size);
     m_Buffer[m_Size] = 0;
@@ -73,7 +71,8 @@ String operator+(const String& some, const String& other) noexcept{
     memcpy(temp, some.m_Buffer, some.m_Size);
     memcpy(temp + some.m_Size, other.m_Buffer, other.m_Size);
     temp[size] = '\0';
-    String t{ temp,size };
+    String t{ temp};
+    t.m_Size = size;
     delete[] temp;
     // this->m_Size = new_size;
     // this->m_Buffer = new_buffer;
@@ -125,13 +124,13 @@ String String::substring(int start) {
 String String::substring(int start, int end) {
     if (end <= start) throw Exception::IndexOutOfBounds{};
     if (end > m_Size) end = this->getSize();
-    int size = end - start;
+    unsigned int size = end - start;
     char* new_buffer = new char[size + 1];
     memcpy(new_buffer, m_Buffer + start, size);
     new_buffer[size] = '\0';
-    String temp;
-    temp.m_Buffer = new_buffer;
+    String temp{new_buffer};
     temp.m_Size = size;
+    delete[] new_buffer;
     //std::cout << size; 
     return temp;
 }

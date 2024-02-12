@@ -136,6 +136,7 @@
     <ClCompile Include="src\LinkedList.cpp" />
     <ClCompile Include="src\Log.cpp" />
     <ClCompile Include="src\LOGProject.cpp" />
+    <ClCompile Include="src\SmartString.cpp" />
     <ClCompile Include="src\String.cpp" />
     <ClCompile Include="src\Test.cpp" />
   </ItemGroup>
@@ -145,6 +146,7 @@
     <ClInclude Include="include\LinkedList.h" />
     <ClInclude Include="include\Log.h" />
     <ClInclude Include="include\namespaceList.h" />
+    <ClInclude Include="include\SmartString.h" />
     <ClInclude Include="include\String.h" />
     <ClInclude Include="include\Exceptions.h" />
   </ItemGroup>
