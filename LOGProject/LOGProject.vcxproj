@@ -139,7 +139,7 @@
     <ClCompile Include="src\LOGProject.cpp" />
     <ClCompile Include="src\SmartString.cpp" />
     <ClCompile Include="src\String.cpp" />
-    <ClCompile Include="src\Test.cpp" />
+    <ClCompile Include="Main.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="include\Complex.h" />

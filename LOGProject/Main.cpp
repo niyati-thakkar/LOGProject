@@ -1,17 +1,25 @@
 #include<iostream>
-#include "../include/Log.h"
-#include "../include/SmartString.h"
-#include "../include/LinkedList.h"
+#include "include/Log.h"
+#include "include/SmartString.h"
+#include "include/LinkedList.h"
 int main()
 {
 	Lognspace::Log log;
 	log.setLogLevel(Lognspace::Log::Level::LevelError);
-	log.Info("Fine!", "Okay", "Doing Good");
+	log.Info("Fine!");
 	log.Warn("Carefull!");
-	log.Error("Stop!", "Can do better", "Cheer Up", "Error:", -342, 'd');
+	log.Error("Stop!");
 	std::cin.get();
 }
-
+//int main()
+//{
+//	Lognspace::Log log;
+//	log.setLogLevel(Lognspace::Log::Level::LevelError);
+//	log.Info("Fine!", "Okay", "Doing Good");
+//	log.Warn("Carefull!");
+//	log.Error("Stop!", "Can do better", "Cheer Up", "Error:", -342, 'd');
+//	std::cin.get();
+//}
 //int main() {
 //	String string = "QickStep";
 //	String second = std::move(string);
