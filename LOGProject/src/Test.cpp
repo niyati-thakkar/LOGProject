@@ -86,26 +86,26 @@
 //	SmartString s11 = func(s10);
 //	std::cout << s11 << "\n";
 //}
-//int main() {
-//    LinkedList ll;
-//    ll.push_front(9);
-//    ll.push_front(7);
-//    ll.push_back(18);
-//    ll.push_back(13);
-//    ll.push_back(534);
-//    ll.push_front(543);
-//    ll.push_front(43);
-//    ll.insert_at(2, 34);
-//    std::cout << ll;
-//    ll.delete_at(3);
-//    // ll.reverse();
-//    ll.print();
-//    try {
-//        std::cout << ll[65];
-//    }
-//    catch (std::runtime_error& e) {
-//        std::cout << "okay3 \n";
-//        std::cout << e.what();
-//    }
-//    // std::cout << ll[1];
-//}
+int main() {
+    LinkedList<int> ll;
+    ll.push_front(9);
+    ll.push_front(7);
+    ll.push_back(18);
+    ll.push_back(13);
+    ll.push_back(534);
+    ll.push_front(543);
+    ll.push_front(43);
+    ll.insert_at(2, 34);
+    //std::cout << ll;
+    ll.delete_at(3);
+    // ll.reverse();
+    ll.print();
+    try {
+        std::cout << ll[65];
+    }
+    catch (std::runtime_error& e) {
+        //std::cout << "okay3 \n";
+        std::cout << e.what();
+    }
+     std::cout << ll[1];
+}
