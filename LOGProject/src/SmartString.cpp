@@ -8,13 +8,13 @@
 size_t SmartString::getSize() {
     return m_Size;
 }
-auto deletor = [](char* ptr) {delete[] ptr; };
+//auto deleter = [](char* ptr) {delete[] ptr; };
 SmartString::SmartString(const char* string, unsigned long int n) {
     // std::cout << "default constructor 1" << "\n";
     if (n < 0 || n > std::numeric_limits<size_t>::max()) throw Exception::Overflow{};
     m_Size = strlen(string);
     if (n != 0) m_Size = n > m_Size ? n : m_Size;
-    m_Buffer = std::shared_ptr<char>(new char[m_Size + 1], deletor);
+    m_Buffer = std::unique_ptr<char>(new char[m_Size + 1]);
     memcpy(m_Buffer.get(), string, m_Size);
     m_Buffer.get()[m_Size] = 0;
 }
@@ -23,7 +23,7 @@ SmartString::SmartString(const SmartString& other) noexcept {
     if (&other != this) {
         // std::cout << "default constructor 2 with string" << "\n";
         m_Size = other.m_Size;
-        m_Buffer = std::shared_ptr<char>(new char[m_Size + 1], deletor);
+        m_Buffer = std::unique_ptr<char>(new char[m_Size + 1]);
         memcpy(m_Buffer.get(), other.m_Buffer.get(), m_Size + 1);
     }
 }
@@ -31,7 +31,7 @@ SmartString::SmartString(const SmartString& other) noexcept {
 SmartString& SmartString::operator=(const SmartString& other) noexcept {
     // std::cout << "assignment operator 1" << " \n";
     m_Size = other.m_Size;
-    m_Buffer = std::shared_ptr<char>(new char[m_Size + 1], deletor);
+    m_Buffer = std::unique_ptr<char>(new char[m_Size + 1]);
     memcpy(m_Buffer.get(), other.m_Buffer.get(), m_Size + 1);
     return *this;
 }
@@ -53,7 +53,7 @@ SmartString operator+(const SmartString& some, const SmartString& other) noexcep
     // std::cout << "plus operator here" << " \n";
     SmartString t{};
     t.m_Size = some.m_Size + other.m_Size;
-    t.m_Buffer = std::shared_ptr<char>(new char[t.m_Size + 1], deletor);
+    t.m_Buffer = std::unique_ptr<char>(new char[t.m_Size + 1]);
     memcpy(t.m_Buffer.get(), some.m_Buffer.get(), some.m_Size);
     memcpy(t.m_Buffer.get() + some.m_Size, other.m_Buffer.get(), other.m_Size);
     t.m_Buffer.get()[t.m_Size] = '\0';
@@ -106,7 +106,7 @@ SmartString SmartString::substring(size_t start, size_t end) {
     if (end > m_Size) end = this->getSize();
     SmartString s{};
     s.m_Size = end - start;
-    s.m_Buffer = std::shared_ptr<char>(new char[m_Size + 1], deletor);
+    s.m_Buffer = std::unique_ptr<char>(new char[m_Size + 1]);
     memcpy(s.m_Buffer.get(), m_Buffer.get() + start, m_Size);
     s.m_Buffer.get()[m_Size] = '\0';
     return s;

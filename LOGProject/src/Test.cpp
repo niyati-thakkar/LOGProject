@@ -109,15 +109,24 @@
 //    }
 //     std::cout << ll[1];
 //}
+//int main() {
+//	// generic linkedlist
+//	LinkedList<String> ll;
+//	ll.push_back("hello");
+//	ll.push_front("hii");
+//	ll.insert_at(1, "greetings");
+//	ll.print();
+//	ll.pop_back();
+//	ll.push_back("good morning");
+//	ll.pop_front();
+//	ll.print();
+//
+//
+//}
 int main() {
-	// generic linkedlist
-	LinkedList<String> ll;
-	ll.push_back("hello");
-	ll.push_front("hii");
-	ll.insert_at(1, "greetings");
-	ll.print();
-	ll.pop_back();
-	ll.push_back("good morning");
-	ll.pop_front();
-	ll.print();
+	SmartString s = "hello";
+	SmartString* t1 = &s;
+	SmartString* t2 = t1;
+	std::cout << *t2;
+
 }
