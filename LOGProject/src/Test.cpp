@@ -21,7 +21,7 @@
 //	String s4 = "fdhak";
 //	s3 = s4 + s3;
 //	std::cout << s3 << std::endl;
-//	/*std::cout << second << std::endl;
+//	std::cout << second << std::endl;
 //	String string1 = "QickStep";
 //	String second2 = "Harishankar";
 //	string1 = string1 + second2;
@@ -30,7 +30,7 @@
 //	String s1 = "hello";
 //	String s2 = "something";
 //	s1 = s2.substring(1,2);
-//	std::cout << s1;*/
+//	std::cout << s1;
 //}
 //#include<limits>
 //SmartString func(SmartString s) {
@@ -59,8 +59,8 @@
 //		std::cout << "okay3 \n";
 //		std::cout << e.what();
 //	}
-//		s2 = s1;
-//		SmartString s3 = s1 + s2;
+//	s2 = s1;
+//	SmartString s3 = s1 + s2;
 //	std::cout << static_cast<void*>(nullptr) << std::endl;
 //	string = "ksgfkdf";
 //	s3 = string + second;
@@ -86,26 +86,38 @@
 //	SmartString s11 = func(s10);
 //	std::cout << s11 << "\n";
 //}
+//int main() {
+//    LinkedList<int> ll;
+//    ll.push_front(9);
+//    ll.push_front(7);
+//    ll.push_back(18);
+//    ll.push_back(13);
+//    ll.push_back(534);
+//    ll.push_front(543);
+//    ll.push_front(43);
+//    ll.insert_at(2, 34);
+//    //std::cout << ll;
+//    ll.delete_at(3);
+//    // ll.reverse();
+//    ll.print();
+//    try {
+//        std::cout << ll[65];
+//    }
+//    catch (std::runtime_error& e) {
+//        //std::cout << "okay3 \n";
+//        std::cout << e.what();
+//    }
+//     std::cout << ll[1];
+//}
 int main() {
-    LinkedList<int> ll;
-    ll.push_front(9);
-    ll.push_front(7);
-    ll.push_back(18);
-    ll.push_back(13);
-    ll.push_back(534);
-    ll.push_front(543);
-    ll.push_front(43);
-    ll.insert_at(2, 34);
-    //std::cout << ll;
-    ll.delete_at(3);
-    // ll.reverse();
-    ll.print();
-    try {
-        std::cout << ll[65];
-    }
-    catch (std::runtime_error& e) {
-        //std::cout << "okay3 \n";
-        std::cout << e.what();
-    }
-     std::cout << ll[1];
+	// generic linkedlist
+	LinkedList<String> ll;
+	ll.push_back("hello");
+	ll.push_front("hii");
+	ll.insert_at(1, "greetings");
+	ll.print();
+	ll.pop_back();
+	ll.push_back("good morning");
+	ll.pop_front();
+	ll.print();
 }

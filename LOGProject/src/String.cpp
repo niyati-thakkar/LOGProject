@@ -5,12 +5,12 @@
 #include "../include/String.h"
 #include "../include/Exceptions.h"
 
-unsigned int String::getSize() {
+size_t String::getSize() {
     return m_Size;
 }
 
 String::String(const char* string) {
-    std::cout << "default constructor 1" << "\n";
+    // std::cout << "default constructor 1" << "\n";
     m_Size = strlen(string);
     m_Buffer = new char[m_Size + 1];
     memcpy(m_Buffer, string, m_Size);
@@ -19,7 +19,7 @@ String::String(const char* string) {
 
 String::String(const String& other) noexcept{
     if (&other != this) {
-        std::cout << "default constructor 2 with string" << "\n";
+        // std::cout << "default constructor 2 with string" << "\n";
         m_Size = other.m_Size;
         m_Buffer = new char[m_Size + 1];
         memcpy(m_Buffer, other.m_Buffer, m_Size + 1);
@@ -27,7 +27,7 @@ String::String(const String& other) noexcept{
 }
 
 String& String::operator=(const String& other) noexcept{
-    std::cout << "assignment operator 1" << " \n";
+    // std::cout << "assignment operator 1" << " \n";
     delete[] m_Buffer;
     m_Size = other.m_Size;
     m_Buffer = new char[m_Size + 1];
@@ -36,7 +36,7 @@ String& String::operator=(const String& other) noexcept{
 }
 
 String& String::operator=(String&& other) noexcept {
-    std::cout << "Moved assignment!!" << std::endl;
+    // std::cout << "Moved assignment!!" << std::endl;
     delete[] m_Buffer;
     m_Size = other.m_Size;
     m_Buffer = std::move(other.m_Buffer);
@@ -49,7 +49,7 @@ String& String::operator=(String&& other) noexcept {
 }
 
 String::String(String&& other) noexcept {
-    std::cout << "Moved!!" << std::endl;
+    // std::cout << "Moved!!" << std::endl;
     delete[] m_Buffer;
     m_Size = other.m_Size;
     m_Buffer = std::move(other.m_Buffer);
@@ -64,7 +64,7 @@ String::~String() { delete[] m_Buffer; }
 
 
 String operator+(const String& some, const String& other) noexcept{
-    std::cout << "plus operator here" << " \n";
+    // std::cout << "plus operator here" << " \n";
 
     auto size = some.m_Size + other.m_Size;
     char* temp = new char[size + 1];
@@ -81,7 +81,7 @@ String operator+(const String& some, const String& other) noexcept{
 }
 
 String& String::operator+=(const String& other) noexcept{
-    std::cout << "plus equalto operator here" << " \n";
+    // std::cout << "plus equalto operator here" << " \n";
     *this = *this + other;
     return *this;
 }
@@ -89,7 +89,7 @@ String& String::operator+=(const String& other) noexcept{
 
 
 
-char& String::operator[](unsigned int index){ 
+char& String::operator[](size_t index){ 
     if (index < 0 || index >= m_Size) throw Exception::IndexOutOfBounds{};
     return m_Buffer[index]; 
 }
@@ -116,22 +116,22 @@ void String::append(const String& other){
 }
 
 
-String String::substring(int start) {
+String String::substring(size_t start) {
     return substring(start, m_Size);
 }
 
 
-String String::substring(int start, int end) {
+String String::substring(size_t start, size_t end) {
     if (end <= start) throw Exception::IndexOutOfBounds{};
     if (end > m_Size) end = this->getSize();
-    unsigned int size = end - start;
+    size_t size = end - start;
     char* new_buffer = new char[size + 1];
     memcpy(new_buffer, m_Buffer + start, size);
     new_buffer[size] = '\0';
     String temp{new_buffer};
     temp.m_Size = size;
     delete[] new_buffer;
-    //std::cout << size; 
+    //// std::cout << size; 
     return temp;
 }
 

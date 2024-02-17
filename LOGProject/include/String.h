@@ -6,7 +6,7 @@
 class String {
 private:
 	char* m_Buffer;
-	unsigned int m_Size=0;
+	size_t m_Size=0;
 public:
 	String(const char* string="");
 	String(const String& other) noexcept;
@@ -14,14 +14,14 @@ public:
 	String& operator=(const String& other) noexcept;
 	String& operator=(String&& other) noexcept;
 	~String();
-	unsigned int getSize();
+	size_t getSize();
 	friend String operator+(const String& some, const String& other) noexcept;
 	bool operator==(const String& other) noexcept;
 	bool operator!=(const String& other) noexcept;
 	String& operator+=(const String& other) noexcept;
-	String substring(int start, int end);
-	String substring(int start);
-	char& operator[](unsigned int index);
+	String substring(size_t start, size_t end);
+	String substring(size_t start);
+	char& operator[](size_t index);
 	static String to_string(int) noexcept;
 	void print() noexcept{
 		std::cout << m_Buffer;

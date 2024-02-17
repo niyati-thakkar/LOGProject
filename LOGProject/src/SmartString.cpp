@@ -5,13 +5,13 @@
 #include "../include/SmartString.h"
 #include "../include/Exceptions.h"
 
-unsigned int SmartString::getSize() {
+size_t SmartString::getSize() {
     return m_Size;
 }
 auto deletor = [](char* ptr) {delete[] ptr; };
 SmartString::SmartString(const char* string, unsigned long int n) {
-    std::cout << "default constructor 1" << "\n";
-    if (n < 0 || n > std::numeric_limits<int>::max()) throw Exception::Overflow{};
+    // std::cout << "default constructor 1" << "\n";
+    if (n < 0 || n > std::numeric_limits<size_t>::max()) throw Exception::Overflow{};
     m_Size = strlen(string);
     if (n != 0) m_Size = n > m_Size ? n : m_Size;
     m_Buffer = std::shared_ptr<char>(new char[m_Size + 1], deletor);
@@ -21,7 +21,7 @@ SmartString::SmartString(const char* string, unsigned long int n) {
 
 SmartString::SmartString(const SmartString& other) noexcept {
     if (&other != this) {
-        std::cout << "default constructor 2 with string" << "\n";
+        // std::cout << "default constructor 2 with string" << "\n";
         m_Size = other.m_Size;
         m_Buffer = std::shared_ptr<char>(new char[m_Size + 1], deletor);
         memcpy(m_Buffer.get(), other.m_Buffer.get(), m_Size + 1);
@@ -29,7 +29,7 @@ SmartString::SmartString(const SmartString& other) noexcept {
 }
 
 SmartString& SmartString::operator=(const SmartString& other) noexcept {
-    std::cout << "assignment operator 1" << " \n";
+    // std::cout << "assignment operator 1" << " \n";
     m_Size = other.m_Size;
     m_Buffer = std::shared_ptr<char>(new char[m_Size + 1], deletor);
     memcpy(m_Buffer.get(), other.m_Buffer.get(), m_Size + 1);
@@ -37,20 +37,20 @@ SmartString& SmartString::operator=(const SmartString& other) noexcept {
 }
 
 SmartString& SmartString::operator=(SmartString&& other) noexcept {
-    std::cout << "Moved assignment!!" << std::endl;
+    // std::cout << "Moved assignment!!" << std::endl;
     m_Size = other.m_Size;
     m_Buffer = std::move(other.m_Buffer);
     return *this;
 }
 
 SmartString::SmartString(SmartString&& other) noexcept {
-    std::cout << "Moved!!" << std::endl;
+    // std::cout << "Moved!!" << std::endl;
     m_Size = other.m_Size;
     m_Buffer = std::move(other.m_Buffer);
 }
 
 SmartString operator+(const SmartString& some, const SmartString& other) noexcept {
-    std::cout << "plus operator here" << " \n";
+    // std::cout << "plus operator here" << " \n";
     SmartString t{};
     t.m_Size = some.m_Size + other.m_Size;
     t.m_Buffer = std::shared_ptr<char>(new char[t.m_Size + 1], deletor);
@@ -61,7 +61,7 @@ SmartString operator+(const SmartString& some, const SmartString& other) noexcep
 }
 
 SmartString& SmartString::operator+=(const SmartString& other) noexcept {
-    std::cout << "plus equalto operator here" << " \n";
+    // std::cout << "plus equalto operator here" << " \n";
     *this = *this + other;
     return *this;
 }
@@ -69,7 +69,7 @@ SmartString& SmartString::operator+=(const SmartString& other) noexcept {
 
 
 
-char& SmartString::operator[](unsigned int index) {
+char& SmartString::operator[](size_t index) {
     if (index < 0 || index >= m_Size) throw Exception::IndexOutOfBounds{};
     return m_Buffer.get()[index];
 }
@@ -96,12 +96,12 @@ void SmartString::append(const SmartString& other) {
 }
 
 
-SmartString SmartString::substring(int start) {
+SmartString SmartString::substring(size_t start) {
     return substring(start, m_Size);
 }
 
 
-SmartString SmartString::substring(int start, int end) {
+SmartString SmartString::substring(size_t start, size_t end) {
     if (end <= start) throw Exception::IndexOutOfBounds{};
     if (end > m_Size) end = this->getSize();
     SmartString s{};
