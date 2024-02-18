@@ -23,6 +23,8 @@ public:
 	String substring(size_t start);
 	char& operator[](size_t index);
 	static String to_string(int) noexcept;
+	static String to_string(const String& s);
+	static String to_string(char s);
 	void print() noexcept{
 		std::cout << m_Buffer;
 	}

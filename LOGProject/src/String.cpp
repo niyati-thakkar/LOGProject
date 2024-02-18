@@ -12,9 +12,11 @@ size_t String::getSize() {
 String::String(const char* string) {
     // std::cout << "default constructor 1" << "\n";
     m_Size = strlen(string);
-    m_Buffer = new char[m_Size + 1];
-    memcpy(m_Buffer, string, m_Size);
-    m_Buffer[m_Size] = 0;
+    //if(m_Size > 0){
+        m_Buffer = new char[m_Size + 1];
+        memcpy(m_Buffer, string, m_Size);
+        m_Buffer[m_Size] = 0;
+    //}
 }
 
 String::String(const String& other) noexcept{
@@ -50,7 +52,7 @@ String& String::operator=(String&& other) noexcept {
 
 String::String(String&& other) noexcept {
     // std::cout << "Moved!!" << std::endl;
-    delete[] m_Buffer;
+    //if(m_Buffer) delete[] m_Buffer;
     m_Size = other.m_Size;
     m_Buffer = std::move(other.m_Buffer);
     // m_Buffer = new char[m_Size + 1];
@@ -179,4 +181,16 @@ String String::to_string(int num) noexcept{
     newBuffer = nullptr;
 
     return result;
+}
+String String::to_string(char s) {
+    String st{};
+    st.m_Buffer = new char[2];
+    memcpy(st.m_Buffer, &s, 2);
+    st.m_Buffer[1] = '\0';
+    st.m_Size = 1;
+    //std::cout << st.m_Buffer << "\n";
+    return st;
+}
+String String::to_string(const String& s) {
+    return s;
 }

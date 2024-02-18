@@ -15,6 +15,7 @@ namespace Lognspace {
 		Level m_LogLevel;
 		Date::Date storedDate;
 		String dateRep;
+		String buffer;
 
 	public:
 		Log();
@@ -29,6 +30,7 @@ namespace Lognspace {
 		void print(T, eles...);
 		void print();
 		void  checkDate();
+		bool printToFile();
 
 	};
 }
@@ -56,7 +58,7 @@ void Lognspace::Log::Info(eles ...messages)
 template<typename T, typename ...eles>
 void Lognspace::Log::print(T first, eles... elements) {
 	//std::cout << __FUNCSIG__ << " ";
-	std::cout << first << " ";
+	buffer =buffer + String::to_string(first) + " ";
 	print(elements...);
 }
 #endif
