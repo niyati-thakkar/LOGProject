@@ -1,29 +1,26 @@
 #include <fstream>
 #include "../include/Log.h"
-void  Lognspace::Log::checkDate() {
+void  Lognspace::Log::check_date() {
 	Date::Date curDate{ Date::Date::currentDate() };
 	//std::cout << curDate.getStringRep();
-	if (Log::storedDate != curDate) {
-		dateRep = curDate.getStringRep();
+	if (Log::stored_date != curDate) {
+		date_rep = curDate.getStringRep();
 	}
 }
 
-Lognspace::Log::Log() : m_LogLevel{ Level::LevelInfo }, storedDate{ 1,1,2024 }
+Lognspace::Log::Log() : m_LogLevel{ Level::LevelInfo }, stored_date{ 1,1,2024 }
 {
-	checkDate();
+	check_date();
 }
 
-void Lognspace::Log::setLogLevel(Log::Level level)
+void Lognspace::Log::set_log_level(Log::Level level)
 {
 	m_LogLevel = level;
 }
-void Lognspace::Log::print() {
+void Lognspace::Log::build_buffer() {
 	buffer += "\n";
-	printToFile();
-	std::cout << buffer;
-	buffer = "";
 }
-bool Lognspace::Log::printToFile() {
+bool Lognspace::Log::print_to_file() {
 	std::ofstream outf{ "Sample.txt", std::ios::app };
 	// If we couldn't open the output file stream for writing
 	if (!outf)
@@ -33,8 +30,14 @@ bool Lognspace::Log::printToFile() {
 		return 0;
 	}
 	// We'll write two lines into this file
-	outf << buffer;
+	outf << date_rep << default_message << buffer;
 	return 1;
 	// When outf goes out of scope, the ofstream
 	// destructor will close the file
+}
+bool Lognspace::Log::load_it(String colored_message) {
+	std::cout << date_rep << " " << colored_message << buffer;
+	print_to_file();
+	buffer = "";
+	return 1;
 }

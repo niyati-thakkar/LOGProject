@@ -13,13 +13,14 @@ namespace Lognspace {
 		
 	private:
 		Level m_LogLevel;
-		Date::Date storedDate;
-		String dateRep;
+		Date::Date stored_date;
+		String date_rep;
 		String buffer;
+		String default_message;
 
 	public:
 		Log();
-		void setLogLevel(Level level);
+		void set_log_level(Level level);
 		template<typename ...eles>
 		void Warn(eles...);
 		template<typename ...eles>
@@ -27,38 +28,50 @@ namespace Lognspace {
 		template<typename ...eles>
 		void Info(eles...); 
 		template<typename T, typename ...eles>
-		void print(T, eles...);
-		void print();
-		void  checkDate();
-		bool printToFile();
+		void build_buffer(T, eles...);
+		void build_buffer();
+		void check_date();
+		bool print_to_file();
+		bool load_it(String colored_message);
 
 	};
 }
 template<typename ...eles>
 void Lognspace::Log::Warn(eles ...messages)
 {
-	checkDate();
-	if (m_LogLevel >= Level::LevelWarning)
-		print(dateRep, "[Warning]:", messages...);
+	check_date();
+	if (m_LogLevel >= Level::LevelWarning) {
+		default_message = "[Warming]:";
+		build_buffer(messages...);
+		load_it("\033[33m[Warning]:\033[0m");
+	}
+		
 }
 template<typename ...eles>
 void Lognspace::Log::Error(eles ...messages)
 {
-	checkDate();
-	if (m_LogLevel >= Level::LevelError)
-		print(dateRep, "[Error]:", messages...);
+	check_date();
+	if (m_LogLevel >= Level::LevelError){
+		default_message = "[Error]:";
+		build_buffer(messages...);
+		load_it("\033[31m[Error]:\033[0m");
+	}
 }
 template<typename ...eles>
 void Lognspace::Log::Info(eles ...messages)
 {
-	checkDate();
-	if (m_LogLevel >= Level::LevelInfo)
-		print(dateRep, "[Info]:", messages...);
+	check_date();
+	if (m_LogLevel >= Level::LevelInfo){
+		default_message = "[Info]:";
+		build_buffer(messages...);
+		load_it("\033[32m[Info]:\033[0m");
+
+	}
 }
 template<typename T, typename ...eles>
-void Lognspace::Log::print(T first, eles... elements) {
+void Lognspace::Log::build_buffer(T first, eles... elements) {
 	//std::cout << __FUNCSIG__ << " ";
-	buffer =buffer + String::to_string(first) + " ";
-	print(elements...);
+	buffer = buffer + String::to_string(first) + " ";
+	build_buffer(elements...);
 }
 #endif

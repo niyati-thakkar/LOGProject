@@ -135,7 +135,7 @@
 int main()
 {
 	Lognspace::Log log;
-	log.setLogLevel(Lognspace::Log::Level::LevelInfo);
+	log.set_log_level(Lognspace::Log::Level::LevelInfo);
 	log.Info("Fine!", "Okay", "Doing Good");
 	log.Warn("Carefull!");
 	log.Error("Stop!", "Can do better", "Cheer Up", "Error:", -342, 'd');
