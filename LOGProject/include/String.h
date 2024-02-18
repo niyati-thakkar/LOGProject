@@ -30,6 +30,7 @@ public:
 	friend std::ostream& operator<<(std::ostream& stream, const String& string);
 
 	void append(const String& other);
+	
 };
 
 #endif

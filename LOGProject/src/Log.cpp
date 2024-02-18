@@ -1,6 +1,6 @@
 #include "../include/Log.h"
 void  Lognspace::Log::checkDate() {
-	Date curDate{ Date::currentDate() };
+	Date::Date curDate{ Date::Date::currentDate() };
 	//std::cout << curDate.getStringRep();
 	if (Log::storedDate != curDate) {
 		dateRep = curDate.getStringRep();

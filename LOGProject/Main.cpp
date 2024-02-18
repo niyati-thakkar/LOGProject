@@ -2,15 +2,47 @@
 #include "include/Log.h"
 #include "include/SmartString.h"
 #include "include/LinkedList.h"
-int main()
-{
-	Lognspace::Log log;
-	log.setLogLevel(Lognspace::Log::Level::LevelError);
-	log.Info("Fine!");
-	log.Warn("Carefull!");
-	log.Error("Stop!");
-	std::cin.get();
+#include <windows.h> 
+using namespace std;
+
+// Driver Code 
+int main(){
+//{       HANDLE h = GetStdHandle(STD_OUTPUT_HANDLE);
+//        WORD wOldColorAttrs;
+//        CONSOLE_SCREEN_BUFFER_INFO csbiInfo;
+//
+//        /*
+//         * First save the current color information
+//         */
+//        GetConsoleScreenBufferInfo(h, &csbiInfo);
+//        wOldColorAttrs = csbiInfo.wAttributes;
+//
+//        /*
+//         * Set the new color information
+//         */
+//        SetConsoleTextAttribute(h, FOREGROUND_RED & FOREGROUND_RED | BACKGROUND_BLUE | FOREGROUND_INTENSITY | BACKGROUND_INTENSITY);
+//
+//        printf("This is a test\n");
+//
+//        /*
+//         * Restore the original colors
+//         */
+//        SetConsoleTextAttribute(h, wOldColorAttrs);
+//        return 0;
+
+        Date::Date d{9,11,2001};
+               
+        std::cout << d.getStringRep();
 }
+//int main()
+//{
+//	Lognspace::Log log;
+//	log.setLogLevel(Lognspace::Log::Level::LevelError);
+//	log.Info("Fine!");
+//	log.Warn("Carefull!");
+//	log.Error("Stop!");
+//	std::cin.get();
+//}
 //int main()
 //{
 //	Lognspace::Log log;

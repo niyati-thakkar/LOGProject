@@ -13,7 +13,7 @@ namespace Lognspace {
 		
 	private:
 		Level m_LogLevel;
-		Date storedDate;
+		Date::Date storedDate;
 		String dateRep;
 
 	public:
@@ -55,6 +55,7 @@ void Lognspace::Log::Info(eles ...messages)
 }
 template<typename T, typename ...eles>
 void Lognspace::Log::print(T first, eles... elements) {
+	//std::cout << __FUNCSIG__ << " ";
 	std::cout << first << " ";
 	print(elements...);
 }

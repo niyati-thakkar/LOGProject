@@ -3,26 +3,33 @@
 #include<iostream>
 #include <ctime>
 #include "../include/String.h"
-class Date {
-public:
-	class InvalidDate : public  std::runtime_error{
-		public:
-			InvalidDate() : std::runtime_error("") {}
-			const char* what() const noexcept { return "Invalid Date Input! try entering DD-MM-YYYY\n"; }
+namespace Date {
+	enum class DateFormat {
+		DMY, DYM, MDY, MYD, YDM, YMD
 	};
-private:
-	int day;
-	int month;
-	int year;
-public:
-	static Date currentDate();
-	Date(int d, int m, int y);
-	String getStringRep() const;
-	bool operator!=(const Date & other) const;
-	bool operator==(const Date& other) const;
-	bool operator>=(const Date& other) const;
-	bool operator<=(const Date& other) const;
-	bool operator>(const Date& other) const;
-	bool operator<(const Date& other) const;
-};
+
+	class Date {
+	public:
+		class InvalidDate : public  std::runtime_error{
+			public:
+				InvalidDate() : std::runtime_error("") {}
+				const char* what() const noexcept { return "Invalid Date Input! try entering DD-MM-YYYY\n"; }
+		};
+	private:
+		int day;
+		int month;
+		int year;
+		DateFormat formatDate;
+	public:
+		static Date currentDate();
+		Date(int d, int m, int y, DateFormat df = DateFormat::DMY);
+		String getStringRep() const;
+		bool operator!=(const Date & other) const;
+		bool operator==(const Date& other) const;
+		bool operator>=(const Date& other) const;
+		bool operator<=(const Date& other) const;
+		bool operator>(const Date& other) const;
+		bool operator<(const Date& other) const;
+	};
+}
 #endif
