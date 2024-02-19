@@ -134,6 +134,7 @@
   <ItemGroup>
     <ClCompile Include="src\Complex.cpp" />
     <ClCompile Include="src\Date.cpp" />
+    <ClCompile Include="src\Entity.cpp" />
     <ClCompile Include="src\LinkedList.cpp" />
     <ClCompile Include="src\Log.cpp" />
     <ClCompile Include="src\LOGProject.cpp" />

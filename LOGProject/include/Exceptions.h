@@ -1,3 +1,5 @@
+#ifndef _EXCEPTIONS_H_
+#define _EXCEPTIONS_H_
 #include<iostream>
 namespace Exception {
 	class Overflow : public std::runtime_error {
@@ -12,3 +14,4 @@ namespace Exception {
 		const char* what() const noexcept { return "Index Out Of Bounds! The index is either less than 0 or greater than the size.\n"; }
 	};
 }
+#endif
