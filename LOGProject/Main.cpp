@@ -132,15 +132,15 @@
 //	log.Error("Stop!");
 //	std::cin.get();
 //}
-int main()
-{
-	Lognspace::Log log;
-	log.set_log_level(Lognspace::Log::Level::LevelInfo);
-	log.Info("Fine!", "Okay", "Doing Good");
-	log.Warn("Carefull!");
-	log.Error("Stop!", "Can do better", "Cheer Up", "Error:", -342, 'd');
-	std::cin.get();
-}
+//int main()
+//{
+//	Lognspace::Log log;
+//	log.set_log_level(Lognspace::Log::Level::LevelInfo);
+//	log.Info("Fine!", "Okay", "Doing Good");
+//	log.Warn("Carefull!");
+//	log.Error("Stop!", "Can do better", "Cheer Up", "Error:", -342, 'd');
+//	std::cin.get();
+//}
 //int main() {
 //	String string = "QickStep";
 //	String second = std::move(string);
