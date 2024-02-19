@@ -1,10 +1,10 @@
 #include <fstream>
 #include "../include/Log.h"
 void  Lognspace::Log::check_date() {
-	Date::Date curDate{ Date::Date::currentDate() };
+	Date curDate{ Date::currentDate() };
 	//std::cout << curDate.getStringRep();
 	if (Log::stored_date != curDate) {
-		date_rep = curDate.getStringRep();
+		date_rep = String::to_string(curDate);
 	}
 }
 

@@ -4,6 +4,7 @@
 #include <limits>
 #include "../include/String.h"
 #include "../include/Exceptions.h"
+#include "../include/Date.h"
 
 size_t String::getSize() {
     return m_Size;
@@ -194,3 +195,49 @@ String String::to_string(char s) {
 String String::to_string(const String& s) {
     return s;
 }
+String String::to_string(Date it) {
+        String date;
+        String day = String::to_string(it.day);
+        String month = String::to_string(it.month);
+        String year = String::to_string(it.year);
+        if (day.getSize() == 1) {
+            day = "0" + day;
+        }
+        if (month.getSize() == 1) {
+            month = "0" + month;
+        }
+        if (year.getSize() == 1) {
+            year = "000" + year;
+        }
+        if (year.getSize() == 2) {
+            year = "00" + year;
+        }
+        if (year.getSize() == 3) {
+            year = "0" + year;
+        }
+
+        DateFormat df = it.formatDate;
+        switch (df) {
+        case DateFormat::DMY:
+            date = day + "/" + month + "/" + year;
+            break;
+        case DateFormat::DYM:
+            date = day + "/" + year + "/" + month;
+            break;
+        case DateFormat::MDY:
+            date = month + "/" + day + "/" + year;
+            break;
+        case DateFormat::MYD:
+            date = month + "/" + year + "/" + day;
+            break;
+        case DateFormat::YDM:
+            date = year + "/" + day + "/" + month;
+            break;
+        case DateFormat::YMD:
+            date = year + "/" + month + "/" + day;
+            break;
+        }
+        // std::cout << date;
+        return date;
+    }
+

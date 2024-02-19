@@ -1,9 +1,8 @@
-#ifndef _DATE_
-#define _DATE_
+#ifndef _DATE_H_
+#define _DATE_H_
 #include<iostream>
 #include <ctime>
-#include "../include/String.h"
-namespace Date {
+#include "String.h"
 	enum class DateFormat {
 		DMY, DYM, MDY, MYD, YDM, YMD
 	};
@@ -23,13 +22,14 @@ namespace Date {
 	public:
 		static Date currentDate();
 		Date(int d, int m, int y, DateFormat df = DateFormat::DMY);
-		String getStringRep() const;
 		bool operator!=(const Date & other) const;
 		bool operator==(const Date& other) const;
 		bool operator>=(const Date& other) const;
 		bool operator<=(const Date& other) const;
 		bool operator>(const Date& other) const;
 		bool operator<(const Date& other) const;
+		friend static String String::to_string(Date);
 	};
-}
+
+
 #endif

@@ -44,10 +44,10 @@ std::ostream& operator<<(std::ostream& stream, const Entity& e) {
 	stream << e.i << " " << e.f << " " << e.s << "\n";
 	return stream;
 }
-int main() {
-	std::vector<Entity> v;
-	v.push_back(Entity{23,45.87f, "hello" });
-	Entity e1 = {3, 56.74, "hell yeas"};
-	Entity e2{ e1 };
-	std::cout << e2;
-}
+//int main() {
+//	std::vector<Entity> v;
+//	v.push_back(Entity{23,45.87f, "hello" });
+//	Entity e1 = {3, 56.74, "hell yeas"};
+//	Entity e2{ e1 };
+//	std::cout << e2;
+//}
