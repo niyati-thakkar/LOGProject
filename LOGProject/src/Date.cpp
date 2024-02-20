@@ -1,51 +1,6 @@
 #include "../include/Date.h"
-namespace Date{
-	String Date::getStringRep() const{
-		String date;
-		String day = String::to_string(this->day);
-		String month = String::to_string(this->month);
-		String year = String::to_string(this->year);
-		if (day.getSize() == 1) {
-			day = "0" + day;
-		}
-		if (month.getSize() == 1) {
-			month = "0" + month;
-		}
-		if (year.getSize() == 1) {
-			year = "000" + year;
-		}
-		if (year.getSize() == 2) {
-			year = "00" + year;
-		}
-		if (year.getSize() == 3) {
-			year = "0" + year;
-		}
 
-		DateFormat df = formatDate;
-		switch (df) {
-		case DateFormat::DMY:
-			date = day + "/" + month + "/" + year;
-			break;
-		case DateFormat::DYM:
-			date = day + "/" + year + "/" + month;
-			break;
-		case DateFormat::MDY:
-			date = month + "/" + day + "/" + year;
-			break;
-		case DateFormat::MYD:
-			date = month + "/" + year + "/" + day;
-			break;
-		case DateFormat::YDM:
-			date = year + "/" + day + "/" + month;
-			break;
-		case DateFormat::YMD:
-			date = year + "/" + month + "/" + day;
-			break;
-		}
-		// std::cout << date;
-		return date;
-	}
-
+	
 	Date Date::currentDate() {
 		struct tm ltm;
 		time_t now = time(0);
@@ -137,4 +92,3 @@ namespace Date{
 		if (Date::month == other.month && Date::day < other.day) return true;
 		return false;
 	}
-}

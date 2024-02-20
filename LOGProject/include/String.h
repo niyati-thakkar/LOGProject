@@ -1,8 +1,11 @@
-#ifndef _STRING_
-#define _STRING_
+class Date;
+
+#ifndef _STRING_H_
+#define _STRING_H_
 
 #include <iostream>
 #include<cstring>
+//#include "Date.h"
 class String {
 private:
 	char* m_Buffer;
@@ -25,6 +28,7 @@ public:
 	static String to_string(int) noexcept;
 	static String to_string(const String& s);
 	static String to_string(char s);
+	static String to_string(Date d);
 	void print() noexcept{
 		std::cout << m_Buffer;
 	}

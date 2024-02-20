@@ -13,7 +13,7 @@ namespace Lognspace {
 		
 	private:
 		Level m_LogLevel;
-		Date::Date stored_date;
+		Date stored_date;
 		String date_rep;
 		String buffer;
 		String default_message;

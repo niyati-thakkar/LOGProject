@@ -2,6 +2,7 @@
 #include "include/Log.h"
 #include "include/SmartString.h"
 #include "include/LinkedList.h"
+#include "include/String.h"
 #include <windows.h> 
 //#include <iostream>
 //#if defined(_WIN32) || defined(_WIN32) || defined(__WIN32__) || defined(_WIN64)
@@ -132,15 +133,15 @@
 //	log.Error("Stop!");
 //	std::cin.get();
 //}
-int main()
-{
-	Lognspace::Log log;
-	log.set_log_level(Lognspace::Log::Level::LevelInfo);
-	log.Info("Fine!", "Okay", "Doing Good");
-	log.Warn("Carefull!");
-	log.Error("Stop!", "Can do better", "Cheer Up", "Error:", -342, 'd');
-	std::cin.get();
-}
+//int main()
+//{
+//	Lognspace::Log log;
+//	log.set_log_level(Lognspace::Log::Level::LevelInfo);
+//	log.Info("Fine!", "Okay", "Doing Good");
+//	log.Warn("Carefull!");
+//	log.Error("Stop!", "Can do better", "Cheer Up", "Error:", -342, 'd');
+//	std::cin.get();
+//}
 //int main() {
 //	String string = "QickStep";
 //	String second = std::move(string);
@@ -259,3 +260,7 @@ int main()
 //	std::cout << *t2;
 //
 //}
+int main() {
+    Date d{ 12,12,2002 };
+    std::cout << String::to_string(d);
+}
