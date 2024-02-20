@@ -21,3 +21,8 @@
 19/02/2024[Error]:Move Assignment 
 19/02/2024[Info]:Default Constructor 
 19/02/2024[Warming]:Copy Constructor 
+20/02/2024[Info]:Default Constructor 
+20/02/2024[Error]:Move Constructor 
+20/02/2024[Error]:Move Assignment 
+20/02/2024[Info]:Default Constructor 
+20/02/2024[Warming]:Copy Constructor 

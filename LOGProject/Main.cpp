@@ -260,7 +260,7 @@
 //	std::cout << *t2;
 //
 //}
-int main() {
-    Date d{ 12,12,2002 };
-    std::cout << String::to_string(d);
-}
+//int main() {
+//    Date d{ 12,12,2002 };
+//    std::cout << String::to_string(d);
+//}

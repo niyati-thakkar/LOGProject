@@ -1,43 +1,75 @@
 #include <fstream>
+#include<iostream>
+//#include <iomanip>
+#include<chrono>
+#include<ctime>
+//#include<put_time>
+#include <format>
 #include "../include/Log.h"
-void  Lognspace::Log::check_date() {
-	Date curDate{ Date::currentDate() };
-	//std::cout << curDate.getStringRep();
-	if (Log::stored_date != curDate) {
-		date_rep = String::to_string(curDate);
-	}
-}
 
-Lognspace::Log::Log() : m_LogLevel{ Level::LevelInfo }, stored_date{ 1,1,2024 }
-{
-	check_date();
-}
-
-void Lognspace::Log::set_log_level(Log::Level level)
-{
-	m_LogLevel = level;
-}
-void Lognspace::Log::build_buffer() {
-	buffer += "\n";
-}
-bool Lognspace::Log::print_to_file() {
-	std::ofstream outf{ "Sample.txt", std::ios::app };
-	// If we couldn't open the output file stream for writing
-	if (!outf)
+namespace Lognspace {
+	Log::Log(Level level, std::string filep, bool to_file) : m_LogLevel{ level }, buffer{ NULL }, file_path{ filep }, printToFile{ to_file }
 	{
-		// Print an error and exit
-		std::cerr << "Uh oh, Sample.txt could not be opened for writing!\n";
-		return 0;
+		ID = get_id();
+		registry r = registry::get_instance();
+		if (to_file && filep.length() == 0) {
+			file_path = "Logging" + (ID / 100);
+		}
+		else if (filep.length() > 0) {
+			printToFile = true;
+		}
+		auto ptr = std::make_shared<Log>(*this);
+		r.logger_objects[ID] = ptr;
 	}
-	// We'll write two lines into this file
-	outf << date_rep << default_message << buffer;
-	return 1;
-	// When outf goes out of scope, the ofstream
-	// destructor will close the file
-}
-bool Lognspace::Log::load_it(String colored_message) {
-	std::cout << date_rep << " " << colored_message << buffer;
-	print_to_file();
-	buffer = "";
-	return 1;
+
+	
+
+
+	Log::~Log() {
+		registry r = registry::get_instance();
+		r.logger_objects.erase(ID);
+	}
+
+
+	unsigned int Log::Log::get_id() {
+		if(((RAND_MAX + 1u) / 1000000) != 0)
+			return 1 + std::rand() / ((RAND_MAX + 1u) / 1000000);
+		return -1;
+	}
+
+	void Log::set_log_level(Log::Level level)
+	{
+		m_LogLevel = level;
+	}
+
+
+	void Log::build_buffer() {
+		buffer += "\n";
+	}
+
+
+	void Log::log_it(int i) {
+		std::string date = getDateTime();
+		//std::string message = default_message[i].first;
+		std::cout << date << " " << default_message[i].second << " " << buffer << "\n";
+		if (printToFile) {
+			std::ofstream outf{ file_path, std::ios::app };
+			if (!outf)
+			{
+				std::cerr << "Uh oh, Sample.txt could not be opened for writing!\n";
+			}
+			outf << date << " " << default_message[i].first << " " << buffer << "\n";
+		}
+
+	}
+
+	std::string Log::getDateTime() {
+		const auto now = std::chrono::system_clock::now();
+		const std::time_t t_c = std::chrono::system_clock::to_time_t(now);
+		char buffer[26];
+		if (ctime_s(buffer, sizeof(buffer), &t_c) == 0) {
+			return buffer;
+		}
+		std::cerr << "Error in formatting time." << std::endl;
+	}
 }

@@ -1,9 +1,24 @@
 #ifndef _LOG_H
 #define _LOG_H
-#include "Date.h"
-#include "String.h"
-
+//#include "Date.h"
+//#include "String.h"
+#include<string>
+#include <chrono>
+#include <string_view>
+#include <unordered_map>
+#include<functional>
+#include<array>
 namespace Lognspace {
+	class registry {
+		friend class Log;
+	public:
+		static registry& get_instance() {
+			static registry instance;
+			return instance;
+		}
+	private:
+		std::unordered_map<unsigned int,std::shared_ptr<Log>> logger_objects;
+	};
 	class Log
 	{
 	public:
@@ -12,14 +27,20 @@ namespace Lognspace {
 		};
 		
 	private:
+		int ID;
 		Level m_LogLevel;
-		Date stored_date;
-		String date_rep;
-		String buffer;
-		String default_message;
+		std::string buffer;
+		std::string file_path;
+		bool printToFile;
+		
 
 	public:
-		Log();
+		inline static std::vector<std::pair<std::string, std::string>> default_message = {
+				std::pair<std::string,std::string>{"[Warming]","\033[33m[Warning]:\033[0m"},
+				std::pair<std::string,std::string>{"[Error]:","\033[31m[Error]:\033[0m"},
+				std::pair<std::string,std::string>{"[Info]:","\033[32m[Info]:\033[0m"}
+		};
+		Log(Level level = Level::LevelInfo, std::string filep = "", bool to_file = false);
 		void set_log_level(Level level);
 		template<typename ...eles>
 		void Warn(eles...);
@@ -30,48 +51,42 @@ namespace Lognspace {
 		template<typename T, typename ...eles>
 		void build_buffer(T, eles...);
 		void build_buffer();
-		void check_date();
-		bool print_to_file();
-		bool load_it(String colored_message);
-
+		std::string getDateTime();
+		static unsigned int get_id();
+		void log_it(int i);
+		~Log();
 	};
 }
 template<typename ...eles>
 void Lognspace::Log::Warn(eles ...messages)
 {
-	check_date();
 	if (m_LogLevel >= Level::LevelWarning) {
-		default_message = "[Warming]:";
 		build_buffer(messages...);
-		load_it("\033[33m[Warning]:\033[0m");
+		log_it(1);
 	}
 		
 }
 template<typename ...eles>
 void Lognspace::Log::Error(eles ...messages)
 {
-	check_date();
 	if (m_LogLevel >= Level::LevelError){
-		default_message = "[Error]:";
 		build_buffer(messages...);
-		load_it("\033[31m[Error]:\033[0m");
+		log_it(2);
 	}
 }
 template<typename ...eles>
 void Lognspace::Log::Info(eles ...messages)
 {
-	check_date();
 	if (m_LogLevel >= Level::LevelInfo){
-		default_message = "[Info]:";
 		build_buffer(messages...);
-		load_it("\033[32m[Info]:\033[0m");
-
+		log_it(0);
 	}
 }
 template<typename T, typename ...eles>
 void Lognspace::Log::build_buffer(T first, eles... elements) {
 	//std::cout << __FUNCSIG__ << " ";
-	buffer = buffer + String::to_string(first) + " ";
+	buffer = buffer + first + " ";
 	build_buffer(elements...);
 }
+
 #endif
