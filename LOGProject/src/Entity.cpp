@@ -2,7 +2,7 @@
 #include<string>
 #include<vector>
 #include<array>
-#include "include/Log.h"
+#include "../include/Log.h"
 class Entity {
 public:
 	Entity(int a = 2, float b = 8.83f, std::string c = "hello") :i{ a }, f{ b }, s{ c } {
