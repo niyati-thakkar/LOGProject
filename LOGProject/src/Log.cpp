@@ -2,7 +2,6 @@
 #include<iostream>
 //#include <iomanip>
 #include<chrono>
-#include<ctime>
 //#include<put_time>
 #include <format>
 #include "../include/Log.h"
@@ -44,7 +43,6 @@ namespace Lognspace {
 
 
 	void Log::build_buffer() {
-		buffer += "\n";
 	}
 
 
@@ -60,16 +58,17 @@ namespace Lognspace {
 			}
 			outf << date << " " << default_message[i].first << " " << buffer << "\n";
 		}
+		buffer = "";
 
 	}
 
 	std::string Log::getDateTime() {
-		const auto now = std::chrono::system_clock::now();
-		const std::time_t t_c = std::chrono::system_clock::to_time_t(now);
-		char buffer[26];
-		if (ctime_s(buffer, sizeof(buffer), &t_c) == 0) {
-			return buffer;
-		}
-		std::cerr << "Error in formatting time." << std::endl;
+		auto _Time = std::chrono::system_clock::now();
+		const auto time_tt = std::chrono::system_clock::to_time_t(_Time);
+		std::tm tm;
+		localtime_s(&tm, &time_tt);
+		char date_buf[26];
+		std::strftime(date_buf, sizeof(date_buf), "%d-%m-%Y %H:%M:%S", &tm);
+		return date_buf;
 	}
 }

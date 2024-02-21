@@ -49,7 +49,7 @@ int main() {
 	Timer t{};
 	std::vector<Entity> v;
 	v.push_back(Entity{23,45.87f, "hello" });
-	Entity e1 = {3, 56.74, "hell yeas"};
-	Entity e2{ e1 };
-	std::cout << e2;
+	//Entity e1 = {3, 56.74, "hello world"};
+	//Entity e2{ e1 };
+	//std::cout << e2;
 }
